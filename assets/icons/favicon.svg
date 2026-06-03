@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pasticceria Papa">
+  <rect width="64" height="64" rx="12" fill="#8b1f36"/>
+  <circle cx="32" cy="32" r="22" fill="#fffaf2"/>
+  <path fill="#8b1f36" d="M23 45V17h11.3c6.2 0 10.3 3.7 10.3 9.2 0 5.7-4.2 9.5-10.5 9.5h-4.8V45H23Zm6.3-14.9h4.4c3.5 0 5.3-1.5 5.3-4.2 0-2.5-1.8-4-5-4h-4.7v8.2Z"/>
+</svg>
