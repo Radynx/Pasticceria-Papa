@@ -24,6 +24,10 @@ html {
   scroll-behavior: smooth;
 }
 
+main [id] {
+  scroll-margin-top: 96px;
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -115,12 +119,26 @@ button {
 }
 
 .site-nav a {
+  position: relative;
   text-decoration: none;
+  transition: color 180ms ease;
 }
 
 .site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a:focus-visible,
+.site-nav a.active {
   color: var(--berry);
+}
+
+.site-nav a.active::after {
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: var(--berry);
+  border-radius: 999px;
 }
 
 .menu-toggle {
@@ -980,8 +998,18 @@ h3 {
   }
 
   .site-nav a {
+    position: relative;
     padding: 15px 18px;
     border-bottom: 1px solid var(--line);
+  }
+
+  .site-nav a.active::after {
+    top: 12px;
+    right: auto;
+    bottom: 12px;
+    left: 0;
+    width: 3px;
+    height: auto;
   }
 
   .site-nav a:last-child {
