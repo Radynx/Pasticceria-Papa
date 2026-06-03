@@ -98,7 +98,7 @@ button {
 
 .brand strong {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-size: 1.12rem;
   line-height: 1.1;
 }
 
@@ -160,10 +160,10 @@ button {
 }
 
 .hero {
-  min-height: clamp(540px, 74svh, 760px);
+  min-height: clamp(500px, 70svh, 700px);
   display: grid;
   align-items: center;
-  padding: clamp(56px, 8vw, 96px) clamp(18px, 5vw, 70px);
+  padding: clamp(42px, 6vw, 72px) clamp(18px, 5vw, 70px);
   background:
     linear-gradient(90deg, rgba(36, 27, 23, 0.78) 0%, rgba(36, 27, 23, 0.5) 42%, rgba(36, 27, 23, 0.13) 100%),
     url("assets/images/colazione.jpg") center / cover;
@@ -212,14 +212,15 @@ h2 {
 }
 
 h1 {
-  max-width: 9ch;
+  max-width: 10ch;
   margin-bottom: 22px;
-  font-size: clamp(3.4rem, 10vw, 7.8rem);
+  font-size: 6.4rem;
+  line-height: 1;
 }
 
 h2 {
   margin-bottom: 20px;
-  font-size: clamp(2.05rem, 5vw, 4.1rem);
+  font-size: 3.4rem;
 }
 
 h3 {
@@ -229,9 +230,9 @@ h3 {
 
 .hero-copy {
   max-width: 570px;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: 1.25rem;
 }
 
 .hero-actions,
@@ -239,6 +240,14 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.hero-note {
+  max-width: 520px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.98rem;
+  font-weight: 700;
 }
 
 .button {
@@ -297,13 +306,20 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  background: var(--line);
   box-shadow: var(--shadow);
 }
 
 .quick-info-item {
-  min-height: 110px;
+  min-height: 148px;
   padding: 24px;
   background: var(--surface);
+}
+
+.quick-info-hours {
+  background:
+    linear-gradient(180deg, rgba(200, 148, 54, 0.13), rgba(255, 255, 255, 0.96)),
+    var(--surface);
 }
 
 .quick-info-item span {
@@ -318,6 +334,14 @@ h3 {
   display: block;
   margin-top: 8px;
   line-height: 1.24;
+}
+
+.quick-info-item small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 .section {
@@ -397,6 +421,12 @@ h3 {
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: 0 12px 34px rgba(36, 27, 23, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(36, 27, 23, 0.12);
 }
 
 .product-card img {
@@ -407,6 +437,57 @@ h3 {
 
 .product-card div {
   padding: 20px;
+}
+
+.order-cta-section {
+  padding: clamp(58px, 8vw, 88px) clamp(18px, 5vw, 70px);
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(98, 19, 38, 0.96), rgba(139, 31, 54, 0.88)),
+    url("assets/images/pasticcini.jpg") center / cover;
+}
+
+.order-cta {
+  width: min(var(--max), 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 5vw, 56px);
+  margin: 0 auto;
+}
+
+.order-cta .eyebrow {
+  color: #f3c76f;
+}
+
+.order-cta h2 {
+  max-width: 780px;
+  margin-bottom: 14px;
+  font-size: 3rem;
+}
+
+.order-cta p:last-child {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.05rem;
+}
+
+.order-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.order-cta .button-primary {
+  color: var(--berry);
+  background: #fff;
+}
+
+.order-cta .button-primary:hover,
+.order-cta .button-primary:focus-visible {
+  background: #fff3dc;
 }
 
 .filter-bar {
@@ -527,7 +608,7 @@ h3 {
 
 .map-consent strong {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  font-size: 2.2rem;
   line-height: 1.05;
 }
 
@@ -601,6 +682,12 @@ h3 {
   background: rgba(139, 31, 54, 0.06);
   font-weight: 800;
   text-decoration: none;
+}
+
+.contact-highlight {
+  padding: 13px 14px;
+  border-left: 3px solid var(--gold);
+  background: rgba(200, 148, 54, 0.1);
 }
 
 .tax-id {
@@ -790,12 +877,12 @@ h3 {
 .cookie-modal h2,
 .policy-content h1 {
   margin-bottom: 10px;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: 2.8rem;
 }
 
 .cookie-banner h2 {
   margin-bottom: 10px;
-  font-size: clamp(1.45rem, 3vw, 1.85rem);
+  font-size: 1.75rem;
 }
 
 .cookie-banner p,
@@ -912,7 +999,7 @@ h3 {
 }
 
 .policy-content h2 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: 2rem;
 }
 
 .policy-content p {
@@ -937,6 +1024,22 @@ h3 {
 }
 
 @media (max-width: 980px) {
+  h1 {
+    font-size: 5.2rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  .hero-copy {
+    font-size: 1.18rem;
+  }
+
+  .order-cta h2 {
+    font-size: 2.7rem;
+  }
+
   .product-grid,
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -956,6 +1059,14 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .order-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .order-cta-actions {
+    justify-content: flex-start;
+  }
+
   .map-panel {
     min-height: 360px;
   }
@@ -966,6 +1077,44 @@ h3 {
 }
 
 @media (max-width: 760px) {
+  .brand strong {
+    font-size: 1rem;
+  }
+
+  h1 {
+    max-width: 9ch;
+    font-size: 3.55rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  .hero-copy {
+    font-size: 1.08rem;
+  }
+
+  .order-cta h2 {
+    font-size: 2.15rem;
+  }
+
+  .map-consent strong {
+    font-size: 1.65rem;
+  }
+
+  .cookie-modal h2,
+  .policy-content h1 {
+    font-size: 2rem;
+  }
+
+  .cookie-banner h2 {
+    font-size: 1.55rem;
+  }
+
+  .policy-content h2 {
+    font-size: 1.55rem;
+  }
+
   .site-header {
     padding-block: 10px;
   }
@@ -1026,6 +1175,10 @@ h3 {
     width: 100%;
   }
 
+  .hero-note {
+    font-size: 0.94rem;
+  }
+
   .quick-info {
     grid-template-columns: 1fr;
     margin-top: 0;
@@ -1035,6 +1188,14 @@ h3 {
 
   .quick-info-item {
     min-height: auto;
+  }
+
+  .order-cta-section {
+    padding-inline: 16px;
+  }
+
+  .order-cta-actions .button {
+    width: 100%;
   }
 
   .section {

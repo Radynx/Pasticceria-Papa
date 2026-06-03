@@ -291,7 +291,7 @@ document.querySelectorAll("a[href^='#']").forEach((link) => {
     }
 
     event.preventDefault();
-    nav.classList.remove("open");
+    nav?.classList.remove("open");
     menuToggle?.setAttribute("aria-expanded", "false");
 
     const top = target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight || 0) - 12;
