@@ -6,10 +6,209 @@ const filterButtons = document.querySelectorAll("[data-filter]");
 const galleryItems = document.querySelectorAll("[data-category]");
 const contactForm = document.querySelector("[data-contact-form]");
 const formStatus = document.querySelector("[data-form-status]");
+let cookieBanner = document.querySelector("[data-cookie-banner]");
+let cookieModal = document.querySelector("[data-cookie-modal]");
+let externalConsentInput = document.querySelector("[data-consent-input='external']");
+const mapPanel = document.querySelector(".map-panel");
+const mapFrame = document.querySelector(".map-panel iframe");
+const mapConsent = document.querySelector("[data-map-consent]");
+const consentKey = "pasticceriaPapaConsent";
+const consentMaxAge = 1000 * 60 * 60 * 24 * 180;
+
+const defaultConsent = {
+  necessary: true,
+  external: false
+};
+
+const ensureCookieUi = () => {
+  if (!cookieBanner) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<section class="cookie-banner" data-cookie-banner hidden aria-label="Preferenze cookie">
+        <button class="cookie-close" type="button" aria-label="Chiudi banner cookie" data-cookie-reject>×</button>
+        <div>
+          <p class="eyebrow">Privacy e cookie</p>
+          <h2>Gestisci i servizi del sito</h2>
+          <p>
+            Usiamo solo ciò che serve al funzionamento della pagina. La mappa Google viene caricata
+            solo se dai il consenso ai servizi esterni.
+          </p>
+          <div class="cookie-links">
+            <a href="privacy.html">Privacy policy</a>
+            <a href="cookie.html">Cookie policy</a>
+          </div>
+        </div>
+        <div class="cookie-actions">
+          <button type="button" class="button button-ghost-dark" data-cookie-reject>Rifiuta non necessari</button>
+          <button type="button" class="button button-outline" data-cookie-customize>Personalizza</button>
+          <button type="button" class="button button-primary" data-cookie-accept>Accetta tutti</button>
+        </div>
+      </section>`
+    );
+    cookieBanner = document.querySelector("[data-cookie-banner]");
+  }
+
+  if (!cookieModal) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="cookie-modal" data-cookie-modal hidden role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+        <div class="cookie-modal-panel">
+          <button class="cookie-close" type="button" aria-label="Chiudi preferenze cookie" data-cookie-modal-close>×</button>
+          <p class="eyebrow">Centro preferenze</p>
+          <h2 id="cookie-modal-title">Scegli cosa attivare</h2>
+          <p>
+            Puoi modificare la scelta in qualsiasi momento dal link “Preferenze cookie” nel footer.
+          </p>
+
+          <div class="consent-option">
+            <div>
+              <h3>Cookie tecnici necessari</h3>
+              <p>Servono a ricordare la scelta privacy e a far funzionare il sito. Sono sempre attivi.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked disabled />
+              <span>Attivo</span>
+            </label>
+          </div>
+
+          <div class="consent-option">
+            <div>
+              <h3>Servizi esterni e mappe</h3>
+              <p>
+                Permettono di caricare Google Maps integrato. Se non li accetti, resta disponibile
+                il link per aprire le indicazioni su Google Maps.
+              </p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" data-consent-input="external" />
+              <span>Consenti</span>
+            </label>
+          </div>
+
+          <div class="cookie-actions">
+            <button type="button" class="button button-ghost-dark" data-cookie-reject>Rifiuta non necessari</button>
+            <button type="button" class="button button-outline" data-cookie-save>Salva preferenze</button>
+            <button type="button" class="button button-primary" data-cookie-accept>Accetta tutti</button>
+          </div>
+        </div>
+      </div>`
+    );
+    cookieModal = document.querySelector("[data-cookie-modal]");
+  }
+
+  externalConsentInput = document.querySelector("[data-consent-input='external']");
+};
+
+ensureCookieUi();
 
 if (year) {
   year.textContent = new Date().getFullYear();
 }
+
+const readConsent = () => {
+  try {
+    const stored = JSON.parse(localStorage.getItem(consentKey));
+    if (!stored || Date.now() - Number(stored.savedAt || 0) > consentMaxAge) {
+      return null;
+    }
+    return { ...defaultConsent, ...stored.categories };
+  } catch {
+    return null;
+  }
+};
+
+const saveConsent = (categories) => {
+  localStorage.setItem(
+    consentKey,
+    JSON.stringify({
+      savedAt: Date.now(),
+      categories: { ...defaultConsent, ...categories }
+    })
+  );
+};
+
+const syncConsentInput = (consent) => {
+  if (externalConsentInput) {
+    externalConsentInput.checked = Boolean(consent?.external);
+  }
+};
+
+const loadMap = () => {
+  if (mapFrame && !mapFrame.src && mapFrame.dataset.src) {
+    mapFrame.src = mapFrame.dataset.src;
+  }
+  mapPanel?.classList.remove("maps-disabled");
+  mapConsent?.classList.add("hidden");
+};
+
+const applyConsent = (consent) => {
+  syncConsentInput(consent);
+
+  if (consent?.external) {
+    loadMap();
+  } else {
+    if (mapFrame) {
+      mapFrame.removeAttribute("src");
+    }
+    mapPanel?.classList.add("maps-disabled");
+    mapConsent?.classList.remove("hidden");
+  }
+};
+
+const hideCookieUi = () => {
+  if (cookieBanner) {
+    cookieBanner.hidden = true;
+  }
+  if (cookieModal) {
+    cookieModal.hidden = true;
+  }
+};
+
+const showCookieModal = () => {
+  syncConsentInput(readConsent() || defaultConsent);
+  if (cookieModal) {
+    cookieModal.hidden = false;
+  }
+};
+
+const setConsent = (categories) => {
+  const consent = { ...defaultConsent, ...categories };
+  saveConsent(consent);
+  applyConsent(consent);
+  hideCookieUi();
+};
+
+const initialConsent = readConsent();
+
+applyConsent(initialConsent || defaultConsent);
+
+if (!initialConsent && cookieBanner) {
+  cookieBanner.hidden = false;
+}
+
+document.querySelectorAll("[data-cookie-accept]").forEach((button) => {
+  button.addEventListener("click", () => setConsent({ external: true }));
+});
+
+document.querySelectorAll("[data-cookie-reject]").forEach((button) => {
+  button.addEventListener("click", () => setConsent({ external: false }));
+});
+
+document.querySelectorAll("[data-cookie-customize], [data-cookie-preferences]").forEach((button) => {
+  button.addEventListener("click", showCookieModal);
+});
+
+document.querySelector("[data-cookie-save]")?.addEventListener("click", () => {
+  setConsent({ external: Boolean(externalConsentInput?.checked) });
+});
+
+document.querySelector("[data-cookie-modal-close]")?.addEventListener("click", () => {
+  cookieModal.hidden = true;
+});
+
+document.querySelector("[data-enable-maps]")?.addEventListener("click", () => {
+  setConsent({ external: true });
+});
 
 const setHeaderState = () => {
   header?.classList.toggle("scrolled", window.scrollY > 8);

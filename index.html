@@ -18,7 +18,7 @@
     <meta property="og:image" content="assets/images/colazione.jpg" />
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="assets/images/colazione.jpg" as="image" />
-    <link rel="stylesheet" href="styles.css?v=map-20260603" />
+    <link rel="stylesheet" href="styles.css?v=privacy-20260603" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -236,9 +236,17 @@
         </div>
 
         <div class="map-panel reveal" aria-label="Mappa per raggiungere Pasticceria Papa">
+          <div class="map-consent" data-map-consent>
+            <strong>Mappa Google non caricata</strong>
+            <p>
+              Per visualizzare la mappa interattiva serve il consenso ai servizi esterni.
+              Puoi comunque aprire le indicazioni su Google Maps.
+            </p>
+            <button class="button button-primary" type="button" data-enable-maps>Mostra la mappa</button>
+          </div>
           <iframe
             title="Mappa di Pasticceria Papa"
-            src="https://www.google.com/maps?q=Pasticceria%20Papa%2C%20Via%20Villa%20Glori%2032C%2C%2025126%20Brescia%20BS&output=embed"
+            data-src="https://www.google.com/maps?q=Pasticceria%20Papa%2C%20Via%20Villa%20Glori%2032C%2C%2025126%20Brescia%20BS&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
@@ -301,8 +309,76 @@
 
     <footer class="site-footer">
       <p>© <span data-year></span> Pasticceria Papa. Via Villa Glori, 32C, 25126, Brescia, BS.</p>
-      <a href="#home">Torna su</a>
+      <div class="footer-links">
+        <button type="button" data-cookie-preferences>Preferenze cookie</button>
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie.html">Cookie</a>
+        <a href="#home">Torna su</a>
+      </div>
     </footer>
+
+    <section class="cookie-banner" data-cookie-banner hidden aria-label="Preferenze cookie">
+      <button class="cookie-close" type="button" aria-label="Chiudi banner cookie" data-cookie-reject>×</button>
+      <div>
+        <p class="eyebrow">Privacy e cookie</p>
+        <h2>Gestisci i servizi del sito</h2>
+        <p>
+          Usiamo solo ciò che serve al funzionamento della pagina. La mappa Google viene caricata
+          solo se dai il consenso ai servizi esterni.
+        </p>
+        <div class="cookie-links">
+          <a href="privacy.html">Privacy policy</a>
+          <a href="cookie.html">Cookie policy</a>
+        </div>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="button button-ghost-dark" data-cookie-reject>Rifiuta non necessari</button>
+        <button type="button" class="button button-outline" data-cookie-customize>Personalizza</button>
+        <button type="button" class="button button-primary" data-cookie-accept>Accetta tutti</button>
+      </div>
+    </section>
+
+    <div class="cookie-modal" data-cookie-modal hidden role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <div class="cookie-modal-panel">
+        <button class="cookie-close" type="button" aria-label="Chiudi preferenze cookie" data-cookie-modal-close>×</button>
+        <p class="eyebrow">Centro preferenze</p>
+        <h2 id="cookie-modal-title">Scegli cosa attivare</h2>
+        <p>
+          Puoi modificare la scelta in qualsiasi momento dal link “Preferenze cookie” nel footer.
+        </p>
+
+        <div class="consent-option">
+          <div>
+            <h3>Cookie tecnici necessari</h3>
+            <p>Servono a ricordare la scelta privacy e a far funzionare il sito. Sono sempre attivi.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked disabled />
+            <span>Attivo</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <div>
+            <h3>Servizi esterni e mappe</h3>
+            <p>
+              Permettono di caricare Google Maps integrato. Se non li accetti, resta disponibile
+              il link per aprire le indicazioni su Google Maps.
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" data-consent-input="external" />
+            <span>Consenti</span>
+          </label>
+        </div>
+
+        <div class="cookie-actions">
+          <button type="button" class="button button-ghost-dark" data-cookie-reject>Rifiuta non necessari</button>
+          <button type="button" class="button button-outline" data-cookie-save>Salva preferenze</button>
+          <button type="button" class="button button-primary" data-cookie-accept>Accetta tutti</button>
+        </div>
+      </div>
+    </div>
 
     <script src="scripts/main.js"></script>
   </body>
