@@ -18,7 +18,7 @@
     <meta property="og:image" content="assets/images/colazione.jpg" />
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="assets/images/colazione.jpg" as="image" />
-    <link rel="stylesheet" href="styles.css?v=privacy-20260603" />
+    <link rel="stylesheet" href="styles.css?v=social-hours-20260603" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -36,24 +36,35 @@
         },
         "telephone": "+39030310863",
         "email": "f.pap69@libero.com",
+        "vatID": "IT02611450988",
+        "sameAs": [
+          "https://www.instagram.com/pasticceria.papa/",
+          "https://www.facebook.com/fabio.papa"
+        ],
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "dayOfWeek": ["Monday", "Wednesday", "Thursday", "Friday"],
             "opens": "07:30",
             "closes": "12:00"
           },
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "dayOfWeek": ["Monday", "Wednesday", "Thursday", "Friday"],
             "opens": "15:30",
-            "closes": "19:00"
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "07:30",
+            "closes": "12:00"
           },
           {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": "Sunday",
             "opens": "08:00",
-            "closes": "12:30"
+            "closes": "12:00"
           }
         ]
       }
@@ -105,7 +116,7 @@
         </div>
         <div class="quick-info-item">
           <span>Orario</span>
-          <strong>Lun-Sab 7:30-12 / 15:30-19</strong>
+          <strong>Lun, Mer-Ven 7:30-12 / 15:30-18</strong>
         </div>
         <div class="quick-info-item">
           <span>Dove siamo</span>
@@ -226,13 +237,21 @@
             <a href="tel:+39030310863">030 310863</a>
             <a href="mailto:f.pap69@libero.com">f.pap69@libero.com</a>
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria%20Papa%2C%20Via%20Villa%20Glori%2032C%2C%2025126%20Brescia%20BS"
+              href="https://www.instagram.com/pasticceria.papa/"
               target="_blank"
               rel="noreferrer"
             >
-              Raggiungi Pasticceria Papa
+              Instagram
+            </a>
+            <a
+              href="https://www.facebook.com/fabio.papa"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Facebook
             </a>
           </div>
+          <p class="tax-id">P.IVA 02611450988</p>
         </div>
 
         <div class="map-panel reveal" aria-label="Mappa per raggiungere Pasticceria Papa">
@@ -242,7 +261,17 @@
               Per visualizzare la mappa interattiva serve il consenso ai servizi esterni.
               Puoi comunque aprire le indicazioni su Google Maps.
             </p>
-            <button class="button button-primary" type="button" data-enable-maps>Mostra la mappa</button>
+            <div class="map-consent-actions">
+              <button class="button button-primary" type="button" data-enable-maps>Mostra la mappa</button>
+              <a
+                class="button button-outline"
+                href="https://www.google.com/maps/dir/?api=1&destination=Pasticceria%20Papa%2C%20Via%20Villa%20Glori%2032C%2C%2025126%20Brescia%20BS"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Apri Google Maps
+              </a>
+            </div>
           </div>
           <iframe
             title="Mappa di Pasticceria Papa"
@@ -270,19 +299,31 @@
           <dl>
             <div>
               <dt>Lunedì</dt>
-              <dd>7:30-12:00 / 15:30-19:00</dd>
+              <dd>7:30-12:00 / 15:30-18:00</dd>
             </div>
             <div>
               <dt>Martedì</dt>
               <dd>Chiuso</dd>
             </div>
             <div>
-              <dt>Mercoledì - Sabato</dt>
-              <dd>7:30-12:00 / 15:30-19:00</dd>
+              <dt>Mercoledì</dt>
+              <dd>7:30-12:00 / 15:30-18:00</dd>
+            </div>
+            <div>
+              <dt>Giovedì</dt>
+              <dd>7:30-12:00 / 15:30-18:00</dd>
+            </div>
+            <div>
+              <dt>Venerdì</dt>
+              <dd>7:30-12:00 / 15:30-18:00</dd>
+            </div>
+            <div>
+              <dt>Sabato</dt>
+              <dd>7:30-12:00</dd>
             </div>
             <div>
               <dt>Domenica</dt>
-              <dd>8:00-12:30</dd>
+              <dd>8:00-12:00</dd>
             </div>
           </dl>
         </div>
@@ -308,8 +349,13 @@
     </main>
 
     <footer class="site-footer">
-      <p>© <span data-year></span> Pasticceria Papa. Via Villa Glori, 32C, 25126, Brescia, BS.</p>
+      <p>
+        © <span data-year></span> Pasticceria Papa. Via Villa Glori, 32C, 25126, Brescia, BS.
+        P.IVA 02611450988.
+      </p>
       <div class="footer-links">
+        <a href="https://www.instagram.com/pasticceria.papa/" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.facebook.com/fabio.papa" target="_blank" rel="noreferrer">Facebook</a>
         <button type="button" data-cookie-preferences>Preferenze cookie</button>
         <a href="privacy.html">Privacy</a>
         <a href="cookie.html">Cookie</a>
