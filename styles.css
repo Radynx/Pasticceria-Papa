@@ -665,36 +665,86 @@ h3 {
 }
 
 .site-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 28px clamp(18px, 4vw, 44px);
-  color: rgba(255, 255, 255, 0.78);
-  background: var(--ink);
+  padding: clamp(64px, 9vw, 104px) clamp(18px, 4vw, 44px) clamp(42px, 6vw, 72px);
+  color: #765733;
+  background: #efe3d3;
 }
 
 .site-footer p {
   margin: 0;
 }
 
-.site-footer a {
-  font-weight: 800;
+.site-footer a,
+.site-footer button {
+  color: inherit;
+  font-weight: 700;
   text-decoration: none;
 }
 
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+.footer-rule {
+  display: block;
+  width: 76px;
+  height: 2px;
+  margin: 0 auto clamp(48px, 7vw, 74px);
+  background: #926c3d;
 }
 
-.footer-links button {
+.footer-grid {
+  width: min(var(--max), 100%);
+  display: grid;
+  grid-template-columns: 0.8fr 1.05fr 0.75fr 1.35fr;
+  gap: clamp(28px, 6vw, 72px);
+  margin: 0 auto;
+}
+
+.footer-column,
+.footer-business {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.footer-column h2 {
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+
+.footer-column a,
+.footer-column button {
+  width: fit-content;
   padding: 0;
-  color: inherit;
   border: 0;
   background: transparent;
-  font-weight: 800;
+  line-height: 1.35;
+}
+
+.footer-column span {
+  display: inline-grid;
+  width: 22px;
+  place-items: center;
+  color: var(--berry);
+  font-weight: 900;
+}
+
+.footer-business {
+  justify-items: end;
+  text-align: right;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.footer-business img {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(139, 31, 54, 0.1);
+}
+
+.footer-business address {
+  font-style: normal;
 }
 
 .cookie-banner {
@@ -874,6 +924,15 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-business {
+    justify-items: start;
+    text-align: left;
+  }
+
   .story-section,
   .contact-section {
     grid-template-columns: 1fr;
@@ -982,8 +1041,16 @@ h3 {
   }
 
   .site-footer {
-    align-items: flex-start;
-    flex-direction: column;
+    padding-top: 58px;
+  }
+
+  .footer-rule {
+    margin-bottom: 40px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .cookie-banner {
