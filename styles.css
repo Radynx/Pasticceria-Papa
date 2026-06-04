@@ -348,6 +348,31 @@ h3 {
   line-height: 1.45;
 }
 
+.quick-hours-list {
+  display: grid;
+  gap: 7px;
+  margin: 10px 0 0;
+}
+
+.quick-hours-list div {
+  display: grid;
+  grid-template-columns: minmax(92px, auto) 1fr;
+  gap: 10px;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.quick-hours-list dt {
+  color: var(--berry);
+  font-weight: 900;
+}
+
+.quick-hours-list dd {
+  margin: 0;
+}
+
 .section {
   width: min(var(--max), calc(100% - 36px));
   margin: 0 auto;
