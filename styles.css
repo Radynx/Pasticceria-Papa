@@ -24,6 +24,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html.is-scrolling {
+  scroll-behavior: auto;
+}
+
 main [id] {
   scroll-margin-top: 96px;
 }

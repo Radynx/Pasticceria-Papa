@@ -224,7 +224,6 @@ const navSections = navLinks
     return section ? { link, section } : null;
   })
   .filter(Boolean);
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const setActiveNav = (activeId) => {
   navSections.forEach(({ link, section }) => {
@@ -263,6 +262,7 @@ const updateActiveNav = () => {
 };
 
 let navTicking = false;
+let scrollAnimationFrame = null;
 
 const requestActiveNavUpdate = () => {
   if (navTicking) {
@@ -281,6 +281,47 @@ menuToggle?.addEventListener("click", () => {
   menuToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
 });
 
+const easeInOutCubic = (progress) =>
+  progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+const animateScrollTo = (targetTop) => {
+  if (scrollAnimationFrame) {
+    window.cancelAnimationFrame(scrollAnimationFrame);
+  }
+
+  const root = document.documentElement;
+  const startTop = window.scrollY;
+  const distance = targetTop - startTop;
+  root.classList.add("is-scrolling");
+
+  if (Math.abs(distance) < 2) {
+    window.scrollTo({ top: targetTop, behavior: "auto" });
+    root.classList.remove("is-scrolling");
+    return;
+  }
+
+  const duration = Math.min(900, Math.max(420, Math.abs(distance) * 0.32));
+  const startTime = window.performance.now();
+
+  const step = (currentTime) => {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const nextTop = startTop + distance * easeInOutCubic(progress);
+
+    window.scrollTo({ top: Math.round(nextTop), behavior: "auto" });
+
+    if (progress < 1) {
+      scrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    scrollAnimationFrame = null;
+    window.scrollTo({ top: targetTop, behavior: "auto" });
+    root.classList.remove("is-scrolling");
+  };
+
+  scrollAnimationFrame = window.requestAnimationFrame(step);
+};
+
 document.querySelectorAll("a[href^='#']").forEach((link) => {
   link.addEventListener("click", (event) => {
     const href = link.getAttribute("href");
@@ -295,10 +336,7 @@ document.querySelectorAll("a[href^='#']").forEach((link) => {
     menuToggle?.setAttribute("aria-expanded", "false");
 
     const top = target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight || 0) - 12;
-    window.scrollTo({
-      top: Math.max(top, 0),
-      behavior: prefersReducedMotion.matches ? "auto" : "smooth"
-    });
+    animateScrollTo(Math.max(top, 0));
 
     if (href !== "#home") {
       setActiveNav(href.slice(1));
